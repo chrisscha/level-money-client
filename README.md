@@ -39,25 +39,24 @@ I have tested running the program on both Linux and Windows.
 Personally, I use Intellij. And I would suspect most modern IDEs handle some of the installation bits magically. Specifically, gradle generates many files on project creation, and I like to try to reduce the number of checked in auto-generated files to a minimum. Especially, when Intellij will just help you out and fill in the missing pieces. Running the program from the command line is a bit more difficult. The following instructions will be for getting the program to run from scratch for Ubuntu and will need to be modified for other flavors of linux like Apple (does brew install still work?). If you are trying to build this on Windows, Solaris, or some other archaic OS, boot into your Linux or Mac partition and try again.
 
 1. Install gradle. 
+  Gradle isn't available from the normal apt-get repositories so you'll first need to update those:
+  ```
+  sudo add-apt-repository ppa:cwchien/gradle
+  sudo apt-get update
+  sudo apt-get install gradle
+  ```
 
-Gradle isn't available from the normal apt-get repositories so you'll first need to update those:
-```
-sudo add-apt-repository ppa:cwchien/gradle
-sudo apt-get update
-sudo apt-get install gradle
-```
+  Navigate to the place in the project directory where the build.gradle file is located. All commands will be run from this location from now on....
 
-Navigate to the place in the project directory where the build.gradle file is located. All commands will be run from this location from now on....
+1. Generate gradle wrapper
+  ```
+  gradle wrapper
+  ```
 
-2. Generate gradle wrapper
-```
-gradle wrapper
-```
-
-3. Build it and Run it
-Gradlew is the gradle wrapper and makes sure that you run a compatible version of gradle. You'll notice that it now installs gradle 2.0, although you probably just installed 3.2.1. The shadowJar is just a bundled uberJar that contains all of the dependencies.
-```
-./gradlew clean shadowJar
-java -jar build/libs/LevelMoneyClient-1.0-SNAPSHOT-all.jar -password password -email email@email.com
-```
-See the Running it section for more.
+1. Build it and Run it
+  Gradlew is the gradle wrapper and makes sure that you run a compatible version of gradle. You'll notice that it now installs gradle 2.0, although you probably just installed 3.2.1. The shadowJar is just a bundled uberJar that contains all of the dependencies.
+  ```
+  ./gradlew clean shadowJar
+  java -jar build/libs/LevelMoneyClient-1.0-SNAPSHOT-all.jar -password password -email email@email.com
+  ```
+  See the Running it section for more.
