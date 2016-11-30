@@ -2,7 +2,7 @@
 Java client for communicating with Level Money service and generating useful or readable data.
 
 ## Functionality
-Retrieves all transactions for the user groups and summarizes them by month. An overall average is calculated. This average ignores months with no activities. It also doesn't make any attempt to handle floating point errors. Unusually large currencies like Zimbabwe Dollars can cause overflows, although all of the math is done with 64-bit longs and should be fine for amounts approaching 1 Quadrillion USD.
+Retrieves all transactions for the user and summarizes them by month. An overall average is calculated. This average ignores months with no activities. It also doesn't make any attempt to handle floating point errors. Unusually large currencies like Zimbabwe Dollars can cause overflows, although all of the math is done with 64-bit longs and should be fine for amounts approaching 1 Quadrillion USD. The program sums and then divides for accuracy's sake but takes a greater risk with overflows. A running average would be less accurate but safer.
 
 The ignoreDonuts flag ingores donut transactions.
 
@@ -36,7 +36,7 @@ If you leave off the correct and required arguments you should get a message tel
 I have tested running the program on both Linux and Windows.
 
 ## Building it
-Personally, I use Intellij. And I would suspect most modern IDEs handle some of the installation bits magically. Specifically, gradle generates many files on project creation, and I like to try to reduce the number of checked in auto-generated files to a minimum. Especially, when Intellij will just help you out and fill in the missing pieces. Running the program from the command line is a bit more difficult. The following instructions will be for getting the program to run from scratch for Ubuntu and will need to be modified for other flavors of linux like Apple.
+Personally, I use Intellij. And I would suspect most modern IDEs handle some of the installation bits magically. Specifically, gradle generates many files on project creation, and I like to try to reduce the number of checked in auto-generated files to a minimum. Especially, when Intellij will just help you out and fill in the missing pieces. Running the program from the command line is a bit more difficult. The following instructions will be for getting the program to run from scratch for Ubuntu and will need to be modified for other flavors of linux like Apple (does brew install still work?). If you are trying to build this on Windows, Solaris, or some other archaic OS, boot into your Linux or Mac partition and try again.
 
 1. Install gradle. 
 
@@ -55,9 +55,9 @@ gradle wrapper
 ```
 
 3. Build it and Run it
-Gradlew is a gradle wrapper and makes sure that you run a compatible version of gradle. You'll notice that it now installs gradle 2.0, although you probably just installed 3.2.1. The shadowJar is just a bundled uberJar that contains all of the dependencies.
+Gradlew is the gradle wrapper and makes sure that you run a compatible version of gradle. You'll notice that it now installs gradle 2.0, although you probably just installed 3.2.1. The shadowJar is just a bundled uberJar that contains all of the dependencies.
 ```
 ./gradlew clean shadowJar
 java -jar build/libs/LevelMoneyClient-1.0-SNAPSHOT-all.jar -password password -email email@email.com
 ```
-See the Running it section for more
+See the Running it section for more.
